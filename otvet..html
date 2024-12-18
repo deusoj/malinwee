@@ -1,0 +1,18 @@
+from docx import Document
+
+# Load the document
+input_path = "/mnt/data/менедж рус.docx"
+output_path = "/mnt/data/менедж рус (отфильтрованный).docx"
+
+doc = Document(input_path)
+new_doc = Document()
+
+# Filter content: Keep only questions and answers marked with "1"
+for paragraph in doc.paragraphs:
+    text = paragraph.text.strip()
+    if text.startswith("В 1") or text.startswith("1"):
+        new_doc.add_paragraph(text)
+
+# Save the filtered document
+new_doc.save(output_path)
+output_path
